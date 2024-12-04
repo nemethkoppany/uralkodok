@@ -1,0 +1,9 @@
+table ,th, td{
+    border-collapse: collapse;
+    border:1px  solid black;
+}
+
+.error{
+    color: red;
+    text-shadow: 1px 1px 1px;
+}
