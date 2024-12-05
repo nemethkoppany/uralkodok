@@ -1,11 +1,10 @@
 
 const uralkodokArray = [//tömb létrehozása
-
 {//1.elem
     ruler: "I. István",//ruler az elem tulajdonsága, "I. IStván" az értéke
     event: "Koronázás",//event az elem tulajdonsága, "Koronázás" az értéke
     year: "1000",//year az elem tulajdonsága, "1000" az értéke
-    event2:"Pannnhalmi apátság megalapítása",//event2 az elem tulajdonsága, "Pannonhalmi apátság megalapítása" az értéke
+    event2:"Pannonhalmi apátság megalapítása",//event2 az elem tulajdonsága, "Pannonhalmi apátság megalapítása" az értéke
     year2:"1001"//year2 az elem tulajdonsága, "1001" az értéke
 },
 {//2.elem
@@ -76,35 +75,39 @@ thead_tr.appendChild(th3); // A fejlécbe
 const tbody = document.createElement("tbody");//tbody elem létrehozása
 table.appendChild(tbody); // A táblázat testébe
 
-for(let i = 0; i < uralkodokArray.length; i++){//Bejárjuk az uralkodokArray-t
-    const element = uralkodokArray[i];//az element miding az aktuális elem értékét fogja felvenni
+for(let Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Currentelement-tel
 
     const tbody_tr = document.createElement("tr");//tr elem létrehozása a tbody-n belül
     tbody.appendChild(tbody_tr);//Belerakjuk a tbody-ba
 
     const ruler = document.createElement("td");//td elem létrehozása a tr-en belül
-    ruler.innerHTML = element.ruler;//a ruler td elem értékének a megadása, a tömb ruler tulajdonságának az aktuális értéke
+    ruler.innerHTML = Currentelement.ruler;//a ruler td elem értékének a megadása, a tömb ruler tulajdonságának az aktuális értéke
     tbody_tr.appendChild(ruler);//Belerakjuk a tr-be
 
     const event = document.createElement("td");//td elem létrehozása a tr-en belül
-    event.innerHTML = element.event;//az event  td elem értékének a megadása, a tömb event tulajdonságának az aktuális értéke
+    event.innerHTML = Currentelement.event;//az event  td elem értékének a megadása, a tömb event tulajdonságának az aktuális értéke
     tbody_tr.appendChild(event);//Belerakjuk a tr-be
 
     const year = document.createElement("td");//td elem létrehozása a tr-en belül
-    year.innerHTML = element.year;//a year td elem értékének a megadása, a tömb year tulajdonságának az aktuális értéke
+    year.innerHTML = Currentelement.year;//a year td elem értékének a megadása, a tömb year tulajdonságának az aktuális értéke
     tbody_tr.appendChild(year);//Belerakjuk a tr-be
 
-    const tbody_tr2 = document.createElement("tr");//tr elem létrehozása a tbody-n belül
-    tbody.appendChild(tbody_tr2);//Belerakjuk a tbody-ba
 
+    if(Currentelement.event2 && Currentelement.year2 !== undefined){//Ha az event2 és a year2-nek van értéke, akkor: 
 
-    const event2 = document.createElement("td");//td elem létrehozása a tr-en belül
-    event2.innerHTML = element.event2;//az event2  td elem értékének a megadása, a tömb event2 tulajdonságának az aktuális értéke
-    tbody_tr2.appendChild(event2);//Belerakjuk a tr-be
+        const defined_tr = document.createElement("tr")//tr elem létrehozása a tbody-n belül
+        tbody.appendChild(defined_tr);//Belerakjuk a tbody-ba
 
-    const year2 = document.createElement("td");//td elem létrehozása a tr-en belül
-    year2.innerHTML = element.year2;//a year2 td elem értékének a megadása, a tömb year2 tulajdonságának az aktuális értéke
-    tbody_tr2.appendChild(year2);//Belerakjuk a tr-be
+        ruler.rowSpan = "2";//A ruler elementnek conjuk össze a sorait, hogy ne legyen üres cella
+
+        const event2 = document.createElement("td");//td elem létrehozása a tr-en belül
+        event2.innerHTML = Currentelement.event2;//az event2 td elem értékének a megadása, a tömb event2 tulajdonságának az aktuális értéke
+        defined_tr.appendChild(event2);//Belerakjuk a tr-be
+
+        const year2 = document.createElement("td");//td elem létrehozása a tr-en belül
+        year2.innerHTML = Currentelement.year2;//az year2 td elem értékének a megadása, a tömb year2 tulajdonságának az aktuális értéke
+        defined_tr.appendChild(year2);//Belerakjuk a tr-be
+    }
 
    
 }
