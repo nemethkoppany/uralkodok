@@ -24,7 +24,7 @@ const uralkodokArray = [//tömb létrehozása
     event3_2: "Kenyármezei csata",//event3_2 az elem tulajdonsága, "Kenyérmezei csata" az értéke
     year3_2: "1479",//year3_2 az elem tulajdonsága, "1479" az értéke
 },
-{//4.elem
+{//5.elem
     ruler4: "II: Rákóczi Ferenc",//headruler4erYear az elem tulajdonsága, "II. Rákóczi Ferenc" az értéke
     event4:"A szabadságharc kezdete",//event4 az elem tulajdonsága, "A szabadságharc kezdete" az értéke
     year4:"1703",//year4 az elem tulajdonsága, "A szabadságharc kezdete" az értéke
