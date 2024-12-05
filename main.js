@@ -1,192 +1,110 @@
 
 const uralkodokArray = [//tömb létrehozása
-{//1. elem
-    headerRuler: "Uralkodó",//headerRuler az elem tulajdonsága, "Uralkodó" az értéke
-    headerEvent: "Esemény",//headerEvent az elem tulajdonsága, "Esemény" az értéke
-    headerYear: "Évszám",//headerYear az elem tulajdonsága, "Évszám" az értéke
+
+{//1.elem
+    ruler: "I. István",//ruler az elem tulajdonsága, "I. IStván" az értéke
+    event: "Koronázás",//event az elem tulajdonsága, "Koronázás" az értéke
+    year: "1000",//year az elem tulajdonsága, "1000" az értéke
+    event2:"Pannnhalmi apátság megalapítása",//event2 az elem tulajdonsága, "Pannonhalmi apátság megalapítása" az értéke
+    year2:"1001"//year2 az elem tulajdonsága, "1001" az értéke
 },
 {//2.elem
-    ruler1: "I. István",//ruler1 az elem tulajdonsága, "I. IStván" az értéke
-    event1: "Koronázás",//event1 az elem tulajdonsága, "Koronázás" az értéke
-    year1: "1000",//year1 az elem tulajdonsága, "1000" az értéke
-    event1_2:"Pannnhalmi apátság megalapítása",//event1_2 az elem tulajdonsága, "Pannonhalmi apátság megalapítása" az értéke
-    year1_2:"1001"//year1_2 az elem tulajdonsága, "1001" az értéke
+    ruler: "IV. Béla",//ruler az elem tulajdonsága, "Iv. Béla" az értéke
+    event:"Tatárjárás",//event az elem tulajdonsága, "Tatárjárás" az értéke
+    year:"1241-1242",//year az elem tulajdonsága, "1241-1242" az értéke
 },
 {//3.elem
-    ruler2: "IV. Béla",//ruler2 az elem tulajdonsága, "Iv. Béla" az értéke
-    event2:"Tatárjárás",//event2 az elem tulajdonsága, "Tatárjárás" az értéke
-    year2:"1241-1242",//year2 az elem tulajdonsága, "1241-1242" az értéke
+    ruler: "Mátyás király",//ruler az elem tulajdonsága, "Mátyás király" az értéke
+    event:"Bécs elfoglalása",//event az elem tulajdonsága, "Bécs elfoglalása" az értéke
+    year: "1485",//year az elem tulajdonsága, "1485" az értéke
+    event2: "Kenyármezei csata",//event2 az elem tulajdonsága, "Kenyérmezei csata" az értéke
+    year2: "1479",//year2 az elem tulajdonsága, "1479" az értéke
 },
 {//4.elem
-    ruler3: "Mátyás király",//ruler3 az elem tulajdonsága, "Mátyás király" az értéke
-    event3:"Bécs elfoglalása",//event3 az elem tulajdonsága, "Bécs elfoglalása" az értéke
-    year3: "1485",//year3 az elem tulajdonsága, "1485" az értéke
-    event3_2: "Kenyármezei csata",//event3_2 az elem tulajdonsága, "Kenyérmezei csata" az értéke
-    year3_2: "1479",//year3_2 az elem tulajdonsága, "1479" az értéke
-},
-{//5.elem
-    ruler4: "II: Rákóczi Ferenc",//headruler4erYear az elem tulajdonsága, "II. Rákóczi Ferenc" az értéke
-    event4:"A szabadságharc kezdete",//event4 az elem tulajdonsága, "A szabadságharc kezdete" az értéke
-    year4:"1703",//year4 az elem tulajdonsága, "A szabadságharc kezdete" az értéke
-    event4_2: "A szabadságharc vége",//event4_2 az elem tulajdonsága, "A szabadságharc vége" az értéke
-    year4_2: "1711",//year4_2 az elem tulajdonsága, "1711" az értéke
+    ruler: "II: Rákóczi Ferenc",//ruler az elem tulajdonsága, "II. Rákóczi Ferenc" az értéke
+    event:"A szabadságharc kezdete",//event az elem tulajdonsága, "A szabadságharc kezdete" az értéke
+    year:"1703",//year az elem tulajdonsága, "A szabadságharc kezdete" az értéke
+    event2: "A szabadságharc vége",//event2 az elem tulajdonsága, "A szabadságharc vége" az értéke
+    year2: "1711",//year2 az elem tulajdonsága, "1711" az értéke
 }
-]
-const table = document.createElement("table");//Létrehozok egy table elemet ami a táblázatomat fogja tartalmazni
-document.body.appendChild(table);//Hozzáadom a bodyhoz
+];
 
-const colgroup = document.createElement("colgroup");//Létrehozok egy colgroup  elemet amiben a téblázat színezése lesz
-table.appendChild(colgroup);//Hozzáadom a Tablehöz
+const headerObj = {//Új fejléc objektum
+        headerRuler: "Uralkodó",//headerRuler tulajdonság, "Uralkodó" az értéke
+        headerEvent: "Esemény",//headerEvent tulajdonság, "Esemény" az értéke
+        headerYear: "Évszám",//headerYear tulajdonság, "Évszám" az értéke
+}
 
-const col1 = document.createElement("col");//col elem létrehozása
-col1.style.backgroundColor = "red";//Az első oszlop háátérszíne piros lesz
-colgroup.appendChild(col1);//Hozzáadom a colgrouphoz
+const table = document.createElement("table"); // Táblázat létrehozása
+document.body.appendChild(table); // Hozzáadás a body-hoz
 
-const col2 = document.createElement("col");//col elem létrehozása
-colgroup.appendChild(col2);//Hozzáadom a colgrouphoz
+const colgroup = document.createElement("colgroup");//colgroup létrehozása, ez fog felelni a színezett oszlopokért
+table.appendChild(colgroup); // Hozzáadás a táblázathoz
 
-const col3 = document.createElement("col");//col elem létrehozása
-col3.style.backgroundColor = "red";//Az harmadik  oszlop háátérszíne piros lesz
-colgroup.appendChild(col3);//Hozzáadom a colgrouphoz
+const col1 = document.createElement("col");//Megadjuk, hogy melyik oszlopról beszélünk
+col1.span = '1';//Meddig ér el ennek az oszlopnak a hatásköre
+col1.style.backgroundColor = "red";//Az oszlop színezése
+colgroup.appendChild(col1); // Hozzáadás a colgroup-hoz
 
-const thead = document.createElement("thead");//Thead elem létrehozása
-table.appendChild(thead);//Hozzárakom a tablehöz
+const col2 = document.createElement("col");//Megadjuk, hogy melyik oszlopról beszélünk
+col2.span = '1';//Meddig ér el ennek az oszlopnak a hatásköre
+colgroup.appendChild(col2); // Hozzáadás a colgroup-hoz
 
-const thead_tr = document.createElement("tr");//Theaden belüli tr létrehozása
-thead.appendChild(thead_tr);//Hozzárakom a theadhez
+const col3 = document.createElement("col");//Megadjuk, hogy melyik oszlopról beszélünk
+col3.span = '1';//Meddig ér el ennek az oszlopnak a hatásköre
+col3.style.backgroundColor = "red";//Az oszlop színezése
+colgroup.appendChild(col3); // Hozzáadás a colgroup-hoz
 
+const thead = document.createElement("thead");//thead elem létrehozása
+table.appendChild(thead); // A táblázat fejlécébe
 
-const th1 = document.createElement("th");//tr-en belüli th létrehozása
-thead_tr.appendChild(th1);//Hozzárakom a tr-hez
-th1.innerHTML = uralkodokArray[0].headerRuler;//az uralkodokArray első elemének a tulajdonságának az értéke
+const thead_tr = document.createElement("tr");//tr elem létrehozása a theaden belül
+thead.appendChild(thead_tr); // A fejlécbe
 
+const th = document.createElement("th");//th elem létrehozása a tr-en belül
+th.innerHTML = headerObj.headerRuler;//a th értéke a headerObj objektum első tulajdonságának az értéke
+thead_tr.appendChild(th); // A fejlécbe
 
-const th2 = document.createElement("th");//tr-en belüli th létrehozása
-thead_tr.appendChild(th2);//Hozzárakom a tr-hez
-th2.innerHTML = uralkodokArray[0].headerEvent;//az uralkodokArray első elemének a tulajdonságának az értéke
+const th2 = document.createElement("th")//th elem létrehozása a tr-en belül
+th2.innerHTML = headerObj.headerEvent;//a th értéke a headerObj objektum második  tulajdonságának az értéke
+thead_tr.appendChild(th2); // A fejlécbe
 
+const th3 = document.createElement("th");//th elem létrehozása a tr-en belül
+th3.innerHTML = headerObj.headerYear;//a th értéke a headerObj objektum harmadik tulajdonságának az értéke
+thead_tr.appendChild(th3); // A fejlécbe
 
-const th3 = document.createElement("th");//tr-en belüli th létrehozása
-thead_tr.appendChild(th3);;//Hozzárakom a tr-hez
-th3.innerHTML = uralkodokArray[0].headerYear;//az uralkodokArray első elemének a tulajdonságának az értéke
+const tbody = document.createElement("tbody");//tbody elem létrehozása
+table.appendChild(tbody); // A táblázat testébe
 
-const tbody = document.createElement("tbody");//Tbody elem létrehozása a tableön belül
-table.appendChild(tbody);//Hozzáadom a table-höz
+for(let i = 0; i < uralkodokArray.length; i++){//Bejárjuk az uralkodokArray-t
+    const element = uralkodokArray[i];//az element miding az aktuális elem értékét fogja felvenni
 
+    const tbody_tr = document.createElement("tr");//tr elem létrehozása a tbody-n belül
+    tbody.appendChild(tbody_tr);//Belerakjuk a tbody-ba
 
-const tbody_tr1 = document.createElement("tr");//Tbodyn belüli tr létrehozása
-tbody.appendChild(tbody_tr1);//Hozzárakom a tbody-hoz
+    const ruler = document.createElement("td");//td elem létrehozása a tr-en belül
+    ruler.innerHTML = element.ruler;//a ruler td elem értékének a megadása, a tömb ruler tulajdonságának az aktuális értéke
+    tbody_tr.appendChild(ruler);//Belerakjuk a tr-be
 
+    const event = document.createElement("td");//td elem létrehozása a tr-en belül
+    event.innerHTML = element.event;//az event  td elem értékének a megadása, a tömb event tulajdonságának az aktuális értéke
+    tbody_tr.appendChild(event);//Belerakjuk a tr-be
 
-const td1 = document.createElement("td");//tr-en belüli td létrehozása
-td1.rowSpan = "2";//A mellette lévő cella egybeolvasztása
-td1.innerHTML = uralkodokArray[1].ruler1;//az uralkodokArray második elemének a tulajdonságának az értéke
-tbody_tr1.appendChild(td1);
+    const year = document.createElement("td");//td elem létrehozása a tr-en belül
+    year.innerHTML = element.year;//a year td elem értékének a megadása, a tömb year tulajdonságának az aktuális értéke
+    tbody_tr.appendChild(year);//Belerakjuk a tr-be
 
-
-const td2 = document.createElement("td");//tr-en belüli td létrehozása
-td2.innerHTML =  uralkodokArray[1].event1;//az uralkodokArray második elemének a tulajdonságának az értéke
-tbody_tr1.appendChild(td2);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td3 = document.createElement("td");//tr-en belüli td létrehozása
-td3.innerHTML =  uralkodokArray[1].year1;//az uralkodokArray második elemének a tulajdonságának az értéke
-tbody_tr1.appendChild(td3);//Hozzárakjuk a td-t a tbodyhoz
-
-const tbody_tr2 = document.createElement("tr");//Tbodyn belüli tr létrehozása
-tbody.appendChild(tbody_tr2);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td4 = document.createElement("td");//tr-en belüli td létrehozása
-td4.innerHTML =  uralkodokArray[1].event1_2;//az uralkodokArray második elemének a tulajdonságának az értéke
-tbody_tr2.appendChild(td4);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td5 = document.createElement("td");//tr-en belüli td létrehozása
-td5.innerHTML =  uralkodokArray[1].year1_2;//az uralkodokArray második elemének a tulajdonságának az értéke
-tbody_tr2.appendChild(td5);//Hozzárakjuk a td-t a tbodyhoz
+    const tbody_tr2 = document.createElement("tr");//tr elem létrehozása a tbody-n belül
+    tbody.appendChild(tbody_tr2);//Belerakjuk a tbody-ba
 
 
-const tbody_tr3 = document.createElement("tr");//Tbodyn belüli tr létrehozása
-tbody.appendChild(tbody_tr3);;//Hozzárakom a tbody-hoz
+    const event2 = document.createElement("td");//td elem létrehozása a tr-en belül
+    event2.innerHTML = element.event2;//az event2  td elem értékének a megadása, a tömb event2 tulajdonságának az aktuális értéke
+    tbody_tr2.appendChild(event2);//Belerakjuk a tr-be
 
+    const year2 = document.createElement("td");//td elem létrehozása a tr-en belül
+    year2.innerHTML = element.year2;//a year2 td elem értékének a megadása, a tömb year2 tulajdonságának az aktuális értéke
+    tbody_tr2.appendChild(year2);//Belerakjuk a tr-be
 
-const td6 = document.createElement("td");//tr-en belüli td létrehozása
-td6.innerHTML =  uralkodokArray[2].ruler2;//az uralkodokArray harmadik elemének a tulajdonságának az értéke
-tbody_tr3.appendChild(td6);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td7 = document.createElement("td");//tr-en belüli td létrehozása
-td7.innerHTML = uralkodokArray[2].event2;//az uralkodokArray harmadik elemének a tulajdonságának az értéke
-tbody_tr3.appendChild(td7);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td8 = document.createElement("td");//tr-en belüli td létrehozása
-td8.innerHTML = uralkodokArray[2].year2;//az uralkodokArray harmadik elemének a tulajdonságának az értéke
-tbody_tr3.appendChild(td8);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const tbody_tr4 = document.createElement("tr");//Tbodyn belüli tr létrehozása
-tbody.appendChild(tbody_tr4);;//Hozzárakom a tbody-hoz
-
-
-const td9 = document.createElement("td");//tr-en belüli td létrehozása
-td9.rowSpan = "2";//A mellette lévő cella egybeolvasztása
-td9.innerHTML = uralkodokArray[3].ruler3;//az uralkodokArray negyedik elemének a tulajdonságának az értéke
-tbody_tr4.appendChild(td9);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td10 = document.createElement("td");//tr-en belüli td létrehozása
-td10.innerHTML = uralkodokArray[3].event3;//az uralkodokArray negyedik elemének a tulajdonságának az értéke
-tbody_tr4.appendChild(td10);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td11 = document.createElement("td");//tr-en belüli td létrehozása
-td11.innerHTML = uralkodokArray[3].year3;//az uralkodokArray negyedik elemének a tulajdonságának az értéke
-tbody_tr4.appendChild(td11);//Hozzárakjuk a td-t a tbodyhoz
-
-const tbody_tr5 = document.createElement("tr");//Tbodyn belüli tr létrehozása
-tbody.appendChild(tbody_tr5);;//Hozzárakom a tbody-hoz
-
-
-const td12 = document.createElement("td");//tr-en belüli td létrehozása
-td12.innerHTML = uralkodokArray[3].event3_2;//az uralkodokArray negyedik elemének a tulajdonságának az értéke
-tbody_tr5.appendChild(td12);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td13 = document.createElement("td");//tr-en belüli td létrehozása
-td13.innerHTML = uralkodokArray[3].year3_2;//az uralkodokArray negyedik elemének a tulajdonságának az értéke
-tbody_tr5.appendChild(td13);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const tbody_tr6 = document.createElement("tr");//Tbodyn belüli tr létrehozása
-tbody.appendChild(tbody_tr6);;//Hozzárakom a tbody-hoz
-
-
-const td14 = document.createElement("td");//tr-en belüli td létrehozása
-td14.rowSpan = "2";//A mellette lévő cella egybeolvasztása
-td14.innerHTML = uralkodokArray[4].ruler4;//az uralkodokArray ötödik elemének a tulajdonságának az értéke
-tbody_tr6.appendChild(td14);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td15 = document.createElement("td");//tr-en belüli td létrehozása
-td15.innerHTML = uralkodokArray[4].event4;//az uralkodokArray ötödik elemének a tulajdonságának az értéke
-tbody_tr6.appendChild(td15);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td16 = document.createElement("td");//tr-en belüli td létrehozása
-td16.innerHTML = uralkodokArray[4].year4;//az uralkodokArray ötödik elemének a tulajdonságának az értéke
-tbody_tr6.appendChild(td16);//Hozzárakjuk a td-t a tbodyhoz
-
-const tbody_tr7 = document.createElement("tr");//Tbodyn belüli tr létrehozása
-tbody.appendChild(tbody_tr7);;//Hozzárakom a tbody-hoz
-
-
-const td17 = document.createElement("td");//tr-en belüli td létrehozása
-td17.innerHTML = uralkodokArray[4].event4_2;//az uralkodokArray ötödik elemének a tulajdonságának az értéke
-tbody_tr7.appendChild(td17);//Hozzárakjuk a td-t a tbodyhoz
-
-
-const td18 = document.createElement("td");//tr-en belüli td létrehozása
-td18.innerHTML = uralkodokArray[4].year4_2;//az uralkodokArray ötödik elemének a tulajdonságának az értéke
-tbody_tr7.appendChild(td18);//Hozzárakjuk a td-t a tbodyhoz
+   
+}
