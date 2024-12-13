@@ -61,35 +61,35 @@ const thead_tr = document.createElement("tr");//tr elem létrehozása a theaden 
 thead.appendChild(thead_tr); // A fejlécbe
 
 const th = document.createElement("th");//th elem létrehozása a tr-en belül
-th.innerHTML = headerObj.headerRuler;//a th értéke a headerObj objektum első tulajdonságának az értéke
+th.innerHTML = headerObj.headerRuler;//a th értéke a headerObj objektum headerRuler tulajdonságának az értéke
 thead_tr.appendChild(th); // A fejlécbe
 
 const th2 = document.createElement("th")//th elem létrehozása a tr-en belül
-th2.innerHTML = headerObj.headerEvent;//a th értéke a headerObj objektum második  tulajdonságának az értéke
+th2.innerHTML = headerObj.headerEvent;//a th értéke a headerObj objektum headerEvenet tulajdonságának az értéke
 thead_tr.appendChild(th2); // A fejlécbe
 
 const th3 = document.createElement("th");//th elem létrehozása a tr-en belül
-th3.innerHTML = headerObj.headerYear;//a th értéke a headerObj objektum harmadik tulajdonságának az értéke
+th3.innerHTML = headerObj.headerYear;//a th értéke a headerObj objektum headerYear tulajdonságának az értéke
 thead_tr.appendChild(th3); // A fejlécbe
 
 const tbody = document.createElement("tbody");//tbody elem létrehozása
 table.appendChild(tbody); // A táblázat testébe
 
-for(let Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Currentelement-tel
+for(const Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Currentelement-tel
 
     const tbody_tr = document.createElement("tr");//tr elem létrehozása a tbody-n belül
     tbody.appendChild(tbody_tr);//Belerakjuk a tbody-ba
 
     const ruler = document.createElement("td");//td elem létrehozása a tr-en belül
-    ruler.innerHTML = Currentelement.ruler;//a ruler td elem értékének a megadása, a tömb ruler tulajdonságának az aktuális értéke
+    ruler.innerHTML = Currentelement.ruler;//A ruler cella értékének beállítása az aktuális eseménnyel, ami a Currentelement ruler tulajdonságának az értéke
     tbody_tr.appendChild(ruler);//Belerakjuk a tr-be
 
     const event = document.createElement("td");//td elem létrehozása a tr-en belül
-    event.innerHTML = Currentelement.event;//az event  td elem értékének a megadása, a tömb event tulajdonságának az aktuális értéke
+    event.innerHTML = Currentelement.event;// Az event cella értékének beállítása az aktuális eseménnyel, ami a Currentelement event tulajdonságának az értéke
     tbody_tr.appendChild(event);//Belerakjuk a tr-be
 
     const year = document.createElement("td");//td elem létrehozása a tr-en belül
-    year.innerHTML = Currentelement.year;//a year td elem értékének a megadása, a tömb year tulajdonságának az aktuális értéke
+    year.innerHTML = Currentelement.year;// A year cella értékének beállítása az aktuális évszámmal, ami a Currentelement year tulajdonságának az értéke
     tbody_tr.appendChild(year);//Belerakjuk a tr-be
 
 
