@@ -178,6 +178,6 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
     uralkodokArray.push(newElement);//Az objektumot hozzáadjuk az uralkodokArray-hoz
     tbody.innerHTML ="";//Töröljük a tábla elemeit, hogy ne generálódjon le többször
     renderTable();//A függvény meghívása
-    thisForm.reset();//Ha megnyomjuk a gombot automatikusan törli az űrlapot
+    thisForm.reset();//Ha megnyomjuk a gombot automatikusan törli az űrlapot 
     }
 })
