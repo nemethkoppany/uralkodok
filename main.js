@@ -117,12 +117,19 @@ renderTable();//A függvény meghívása
 const form = document.getElementById("form");//bekérjük a form elementet a html-ből a getElementById-val és eltároljuk azt egy form nevű változóban
 
 form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb lenyomásakor aktiválódik
-    e.preventDefault;//Ez azért van, hogy az űrlap alapértelmezetten lefusson
+    e.preventDefault();//Ez azért van, hogy az űrlap alapértelmezetten lefusson
     const rulerName = document.getElementById("uralkodo_nev");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
     const event1 = document.getElementById("esemeny1");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
     const year1 = document.getElementById("evszam1");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
     const event2 = document.getElementById("esemeny2");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
     const year2 = document.getElementById("evszam2");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
+
+    const thisForm = e.currentTarget;//Az eseményt kiváltó form benne van a thisForm változóban
+    const elementWithError = thisForm.querySelectorAll(".error");//Minden olyan element aminek van error class-a
+    for(const errorElement of elementWithError){//Végigmegyünk az errorElementteé a bekért elemeken
+        errorElement.innerHTML ="";//lenullázzuk az elemek tartalmát
+    }
+    let valid = true; //A valid alapértelmezetten true, azaz nincs hiba
 
     const rulerNameValue = rulerName.value;//A bekért HTML element értékét eltároljuk egy változóban
     const event1Value = event1.value;//A bekért HTML element értékét eltároljuk egy változóban
@@ -130,14 +137,47 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
     const event2Value = event2.value;//A bekért HTML element értékét eltároljuk egy változóban
     const year2Value = year2.value;//A bekért HTML element értékét eltároljuk egy változóban
 
-    const newElement = {//Új objektum létrehozása
-        rulerName : rulerNameValue,//Az objektum tulajdonságának értéket adunk
-        event1 : event1Value,//Az objektum tulajdonságának értéket adunk
-        year1 : year1Value,//Az objektum tulajdonságának értéket adunk
-        event2 : event2Value,//Az objektum tulajdonságának értéket adunk
-        year2 : year2Value//Az objektum tulajdonságának értéket adunk
+    if(rulerNameValue === ""){//Ha az uralkodó értéke nem lett megadva
+        const parentElement = rulerName.parentElement;//a parentElementben tároljuk el a rulerName parentElementjét ami ebben az esetben a div classa, a field(mert ebben a divben van benne))
+        const errorPlace = parentElement.querySelector(".error");//A parentelemen belüli error classal ellátott elem keresése és változóban tárolása
+        if(errorPlace != undefined){//Ha az error elem létezik
+            errorPlace.innerHTML = "Az uralkodó nevének megadása kötelező"//Érték megadása
+        }
+        valid = false;//És már van hiba az oldalban, tehát megbukott a validáción
     }
+
+    if(event1Value === ""){//Ha az esemény értéke nem lett megadva
+        const parentElement = event1.parentElement;//a parentElementben tároljuk el az event1  parentElementjét ami ebben az esetben a div classa, a field(mert ebben a divben van benne))
+        const errorPlace = parentElement.querySelector(".error");//A parentelemen belüli error classal ellátott elem keresése és változóban tárolása
+        if(errorPlace != undefined){//Ha az error elem létezik
+            errorPlace.innerHTML = "Az esemény megadása kötelező"//Érték megadása
+        }
+        valid = false;//És már van hiba az oldalban, tehát megbukott a validáción
+    }
+
+    if(year1Value === ""){//Ha az évszám  értéke nem lett megadva
+        const parentElement = year1.parentElement;//a parentElementben tároljuk el az year1  parentElementjét ami ebben az esetben a div classa, a field(mert ebben a divben van benne))
+        const errorPlace = parentElement.querySelector(".error");//A parentelemen belüli error classal ellátott elem keresése és változóban tárolása
+        if(errorPlace != undefined){//Ha az error elem létezik
+            errorPlace.innerHTML = "Az esemény évszámának megadása kötelező";//Érték megadása
+        }
+        valid = false;//És már van hiba az oldalban, tehát megbukott a validáción
+    }
+
+    if(valid){//Ha minden szükséges elem(uralkodó, esemény és annak évszáma) meg van adva akkor mehet tovább a generálás
+        const newElement = {//Új objektum létrehozása
+            ruler : rulerNameValue,//Az objektum tulajdonságának értéket adunk
+            event : event1Value,//Az objektum tulajdonságának értéket adunk
+            year : year1Value,//Az objektum tulajdonságának értéket adunk
+            event2 : event2Value,//Az objektum tulajdonságának értéket adunk
+            year2 : year2Value//Az objektum tulajdonságának értéket adunk
+        }
+    
+
+   
     uralkodokArray.push(newElement);//Az objektumot hozzáadjuk az uralkodokArray-hoz
     tbody.innerHTML ="";//Töröljük a tábla elemeit, hogy ne generálódjon le többször
     renderTable();//A függvény meghívása
+    thisForm.reset();//Ha megnyomjuk a gombot automatikusan törli az űrlapot
+    }
 })
