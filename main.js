@@ -117,7 +117,7 @@ renderTable();//A függvény meghívása
 const form = document.getElementById("form");//bekérjük a form elementet a html-ből a getElementById-val és eltároljuk azt egy form nevű változóban
 
 form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb lenyomásakor aktiválódik
-    e.preventDefault();//Ez azért van, hogy az űrlap alapértelmezetten lefusson
+    e.preventDefault();//Ez azért van, hogy az űrlap alapértelmezetten ne fusson le 
     const rulerName = document.getElementById("uralkodo_nev");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
     const event1 = document.getElementById("esemeny1");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
     const year1 = document.getElementById("evszam1");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
@@ -169,7 +169,7 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
 })
 function validateFormHtmlField(inputHtmlElement, errormessage){//Új függvény melynek van két bemeneti értéke
     let valid = true;//Alapértelmezetten a weboldal-ban nincs hiba, azaz az érték true
-    if(inputHtmlElement.value === ""|| inputHtmlElement.value=== " "){//Ha a bemeneti mezőben nincs semmi(még akkor is belép az if-be ha csak egy szóköz van megadva)
+    if(inputHtmlElement.value.trim()  === ""){//Ha a bemeneti mezőben nincs semmi
         const parentElement = inputHtmlElement.parentElement;//eltároljuk egy változóban a beviteli mező parentelementjét, itt ez a field(mert ebben a divben van)
         const errorPlace = parentElement.querySelector(".error");// Megkeresi a parentElementben  az error classal rendelkező elemet 
         if(errorPlace != undefined){//Ha ez az elem létezik
