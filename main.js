@@ -112,4 +112,32 @@ for(const Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Cu
 
 }
 }
-renderTable();
+renderTable();//A függvény meghívása
+
+const form = document.getElementById("form");//bekérjük a form elementet a html-ből a getElementById-val és eltároljuk azt egy form nevű változóban
+
+form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb lenyomásakor aktiválódik
+    e.preventDefault;//Ez azért van, hogy az űrlap alapértelmezetten lefusson
+    const rulerName = document.getElementById("uralkodo_nev");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
+    const event1 = document.getElementById("esemeny1");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
+    const year1 = document.getElementById("evszam1");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
+    const event2 = document.getElementById("esemeny2");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
+    const year2 = document.getElementById("evszam2");//Bekérjük a HTML elementet az id alapján és eltároljuk azt egy változóban
+
+    const rulerNameValue = rulerName.value;//A bekért HTML element értékét eltároljuk egy változóban
+    const event1Value = event1.value;//A bekért HTML element értékét eltároljuk egy változóban
+    const year1Value = year1.value;//A bekért HTML element értékét eltároljuk egy változóban
+    const event2Value = event2.value;//A bekért HTML element értékét eltároljuk egy változóban
+    const year2Value = year2.value;//A bekért HTML element értékét eltároljuk egy változóban
+
+    const newElement = {//Új objektum létrehozása
+        rulerName : rulerNameValue,//Az objektum tulajdonságának értéket adunk
+        event1 : event1Value,//Az objektum tulajdonságának értéket adunk
+        year1 : year1Value,//Az objektum tulajdonságának értéket adunk
+        event2 : event2Value,//Az objektum tulajdonságának értéket adunk
+        year2 : year2Value//Az objektum tulajdonságának értéket adunk
+    }
+    uralkodokArray.push(newElement);//Az objektumot hozzáadjuk az uralkodokArray-hoz
+    tbody.innerHTML ="";//Töröljük a tábla elemeit, hogy ne generálódjon le többször
+    renderTable();//A függvény meghívása
+})
