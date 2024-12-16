@@ -131,40 +131,26 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
     }
     let valid = true; //A valid alapértelmezetten true, azaz nincs hiba
 
-    const rulerNameValue = rulerName.value;//A bekért HTML element értékét eltároljuk egy változóban
-    const event1Value = event1.value;//A bekért HTML element értékét eltároljuk egy változóban
-    const year1Value = year1.value;//A bekért HTML element értékét eltároljuk egy változóban
-    const event2Value = event2.value;//A bekért HTML element értékét eltároljuk egy változóban
-    const year2Value = year2.value;//A bekért HTML element értékét eltároljuk egy változóban
+ 
 
-    if(rulerNameValue === ""){//Ha az uralkodó értéke nem lett megadva
-        const parentElement = rulerName.parentElement;//a parentElementben tároljuk el a rulerName parentElementjét ami ebben az esetben a div classa, a field(mert ebben a divben van benne))
-        const errorPlace = parentElement.querySelector(".error");//A parentelemen belüli error classal ellátott elem keresése és változóban tárolása
-        if(errorPlace != undefined){//Ha az error elem létezik
-            errorPlace.innerHTML = "Az uralkodó nevének megadása kötelező"//Érték megadása
-        }
-        valid = false;//És már van hiba az oldalban, tehát megbukott a validáción
-    }
+  if(!validateFormHtmlField(rulerName, "Az uralkodó megadása kötelező")){//Ha a validateFormHtmlField hamissal tér vissza, azaz a beviteli mező üres, akkor írja ki a hibaüzenetet
+    valid = false;//A valid értéke hamis, azaz van hiba
+  }
 
-    if(event1Value === ""){//Ha az esemény értéke nem lett megadva
-        const parentElement = event1.parentElement;//a parentElementben tároljuk el az event1  parentElementjét ami ebben az esetben a div classa, a field(mert ebben a divben van benne))
-        const errorPlace = parentElement.querySelector(".error");//A parentelemen belüli error classal ellátott elem keresése és változóban tárolása
-        if(errorPlace != undefined){//Ha az error elem létezik
-            errorPlace.innerHTML = "Az esemény megadása kötelező"//Érték megadása
-        }
-        valid = false;//És már van hiba az oldalban, tehát megbukott a validáción
-    }
-
-    if(year1Value === ""){//Ha az évszám  értéke nem lett megadva
-        const parentElement = year1.parentElement;//a parentElementben tároljuk el az year1  parentElementjét ami ebben az esetben a div classa, a field(mert ebben a divben van benne))
-        const errorPlace = parentElement.querySelector(".error");//A parentelemen belüli error classal ellátott elem keresése és változóban tárolása
-        if(errorPlace != undefined){//Ha az error elem létezik
-            errorPlace.innerHTML = "Az esemény évszámának megadása kötelező";//Érték megadása
-        }
-        valid = false;//És már van hiba az oldalban, tehát megbukott a validáción
-    }
+  if(!validateFormHtmlField(event1, "Az esemény megadása kötelező")){//Ha a validateFormHtmlField hamissal tér vissza, azaz a beviteli mező üres, akkor írja ki a hibaüzenetet
+    valid = false;//A valid értéke hamis, azaz van hiba
+  }
+  if(!validateFormHtmlField(year1, "Az évszám megadása kötelező")){//Ha a validateFormHtmlField hamissal tér vissza, azaz a beviteli mező üres, akkor írja ki a hibaüzenetet
+    valid = false;//A valid értéke hamis, azaz van hiba
+  }
 
     if(valid){//Ha minden szükséges elem(uralkodó, esemény és annak évszáma) meg van adva akkor mehet tovább a generálás
+        const rulerNameValue = rulerName.value;//A bekért HTML element értékét eltároljuk egy változóban
+        const event1Value = event1.value;//A bekért HTML element értékét eltároljuk egy változóban
+        const year1Value = year1.value;//A bekért HTML element értékét eltároljuk egy változóban
+        const event2Value = event2.value;//A bekért HTML element értékét eltároljuk egy változóban
+        const year2Value = year2.value;//A bekért HTML element értékét eltároljuk egy változóban
+
         const newElement = {//Új objektum létrehozása
             ruler : rulerNameValue,//Az objektum tulajdonságának értéket adunk
             event : event1Value,//Az objektum tulajdonságának értéket adunk
@@ -181,3 +167,15 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
     thisForm.reset();//Ha megnyomjuk a gombot automatikusan törli az űrlapot 
     }
 })
+function validateFormHtmlField(inputHtmlElement, errormessage){//Új függvény melynek van két bemeneti értéke
+    let valid = true;//Alapértelmezetten a weboldal-ban nincs hiba, azaz az érték true
+    if(inputHtmlElement.value === ""|| inputHtmlElement.value=== " "){//Ha a bemeneti mezőben nincs semmi(még akkor is belép az if-be ha csak egy szóköz van megadva)
+        const parentElement = inputHtmlElement.parentElement;//eltároljuk egy változóban a beviteli mező parentelementjét, itt ez a field(mert ebben a divben van)
+        const errorPlace = parentElement.querySelector(".error");// Megkeresi a parentElementben  az error classal rendelkező elemet 
+        if(errorPlace != undefined){//Ha ez az elem létezik
+            errorPlace.innerHTML = errormessage;//Akkor megadunk neki egy hibaüzenetet
+        }
+        valid = false;//És van hiba a weboldalon/űrlapon, tehát megbukott a validáción
+    }
+    return valid;//Visszatérünk a validdal, true ha átment a validáción, false ha nem
+}
