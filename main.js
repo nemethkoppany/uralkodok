@@ -75,6 +75,7 @@ thead_tr.appendChild(th3); // A fejlécbe
 const tbody = document.createElement("tbody");//tbody elem létrehozása
 table.appendChild(tbody); // A táblázat testébe
 
+function renderTable(){//Új függvény definiálása
 for(const Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Currentelement-tel
 
     const tbody_tr = document.createElement("tr");//tr elem létrehozása a tbody-n belül
@@ -109,5 +110,6 @@ for(const Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Cu
         defined_tr.appendChild(year2);//Belerakjuk a tr-be
     }
 
-   
 }
+}
+renderTable();
