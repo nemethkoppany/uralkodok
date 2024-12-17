@@ -129,22 +129,10 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
     for(const errorElement of elementWithError){//Végigmegyünk az errorElementteé a bekért elemeken
         errorElement.innerHTML ="";//lenullázzuk az elemek tartalmát
     }
-    let valid = true; //A valid alapértelmezetten true, azaz nincs hiba
 
- 
 
-  if(!validateFormHtmlField(rulerName, "Az uralkodó megadása kötelező")){//Ha a validateFormHtmlField hamissal tér vissza, azaz a beviteli mező üres, akkor írja ki a hibaüzenetet
-    valid = false;//A valid értéke hamis, azaz van hiba
-  }
 
-  if(!validateFormHtmlField(event1, "Az esemény megadása kötelező")){//Ha a validateFormHtmlField hamissal tér vissza, azaz a beviteli mező üres, akkor írja ki a hibaüzenetet
-    valid = false;//A valid értéke hamis, azaz van hiba
-  }
-  if(!validateFormHtmlField(year1, "Az évszám megadása kötelező")){//Ha a validateFormHtmlField hamissal tér vissza, azaz a beviteli mező üres, akkor írja ki a hibaüzenetet
-    valid = false;//A valid értéke hamis, azaz van hiba
-  }
-
-    if(valid){//Ha minden szükséges elem(uralkodó, esemény és annak évszáma) meg van adva akkor mehet tovább a generálás
+    if(simpleValidation(rulerName,event1,year1,event2,year2)){
         const rulerNameValue = rulerName.value;//A bekért HTML element értékét eltároljuk egy változóban
         const event1Value = event1.value;//A bekért HTML element értékét eltároljuk egy változóban
         const year1Value = year1.value;//A bekért HTML element értékét eltároljuk egy változóban
@@ -167,6 +155,45 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
     thisForm.reset();//Ha megnyomjuk a gombot automatikusan törli az űrlapot 
     }
 })
+
+function simpleValidation(rulerInput,eventInput,yearInput, event2Input, year2Input){
+    let valid = true;
+
+    if(!validateFormHtmlField(rulerInput, "Az uralkodó megadása kötelező!")){
+        valid = false;
+    }
+
+    if(!validateFormHtmlField(eventInput, "Az esemény megadása kötelező!")){
+        valid = false;
+    }
+
+    if(!validateFormHtmlField(yearInput, "Az évszám megadása kötelező!")){
+        valid = false;
+    }
+
+   
+    if ((event2Input.value && !year2Input.value) || (!event2Input.value && year2Input.value)) {
+
+        if(!event2Input.value ){
+            validateFormHtmlField(event2Input, "Minden évszámhoz kell tartoznia eseménynek!");
+        }
+
+        if(!year2Input.value ){
+            validateFormHtmlField(year2Input, "Minden eseményhez kell tartoznia évszámnak!");
+        }
+        
+        valid = false;
+    }
+    
+
+   
+    
+
+    return valid;
+
+    
+}
+
 function validateFormHtmlField(inputHtmlElement, errormessage){//Új függvény melynek van két bemeneti értéke
     let valid = true;//Alapértelmezetten a weboldal-ban nincs hiba, azaz az érték true
     if(inputHtmlElement.value.trim()  === ""){//Ha a bemeneti mezőben nincs semmi
