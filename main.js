@@ -130,9 +130,7 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
         errorElement.innerHTML ="";//lenullázzuk az elemek tartalmát
     }
 
-
-
-    if(simpleValidation(rulerName,event1,year1,event2,year2)){
+    if(simpleValidation(rulerName,event1,year1) && masodikAdatokValidacio(event2,year2)){//Ha (a függvény meghívása és lefuttatása a megfelelő adatokkal) azaz meg van adva uralkodó, az első esemény és évszám és ha vagy a második évszám vagy a második esemény meg van adva akkor a másikat is meg kell adni, ha egyik sincs megadva akkor nem kötelező megadni őket
         const rulerNameValue = rulerName.value;//A bekért HTML element értékét eltároljuk egy változóban
         const event1Value = event1.value;//A bekért HTML element értékét eltároljuk egy változóban
         const year1Value = year1.value;//A bekért HTML element értékét eltároljuk egy változóban
@@ -146,9 +144,7 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
             event2 : event2Value,//Az objektum tulajdonságának értéket adunk
             year2 : year2Value//Az objektum tulajdonságának értéket adunk
         }
-    
 
-   
     uralkodokArray.push(newElement);//Az objektumot hozzáadjuk az uralkodokArray-hoz
     tbody.innerHTML ="";//Töröljük a tábla elemeit, hogy ne generálódjon le többször
     renderTable();//A függvény meghívása
@@ -156,44 +152,41 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
     }
 })
 
-function simpleValidation(rulerInput,eventInput,yearInput, event2Input, year2Input){
-    let valid = true;
 
-    if(!validateFormHtmlField(rulerInput, "Az uralkodó megadása kötelező!")){
-        valid = false;
-    }
-
-    if(!validateFormHtmlField(eventInput, "Az esemény megadása kötelező!")){
-        valid = false;
-    }
-
-    if(!validateFormHtmlField(yearInput, "Az évszám megadása kötelező!")){
-        valid = false;
-    }
-
-   
-    if ((event2Input.value && !year2Input.value) || (!event2Input.value && year2Input.value)) {
-
-        if(!event2Input.value ){
-            validateFormHtmlField(event2Input, "Minden évszámhoz kell tartoznia eseménynek!");
+function masodikAdatokValidacio( event2Input, year2Input){//Új függvény amely a  második eseményt és annak évszámát kezeli
+    let valid = true;//A valid értéke alapértelmezetten true 
+    if ((event2Input.value && !year2Input.value) || (!event2Input.value && year2Input.value)) {//Ha a második eseménybe van valami írva de a második évszámba nincs vagy fordítva
+        if(!event2Input.value ){//Ha a második eseménybe nincs semmi írva(ez csak azért van még egy if-ben mert  ezt így jobban értem)
+            validateFormHtmlField(event2Input, "Minden évszámhoz kell tartoznia eseménynek!");//Akkor írjon ki egy hibaüzenetet
         }
-
-        if(!year2Input.value ){
-            validateFormHtmlField(year2Input, "Minden eseményhez kell tartoznia évszámnak!");
+        if(!year2Input.value ){//Ha a második évszámhoz nincs semmi írva(ez csak azért van még egy if-ben mert  ezt így jobban értem)
+            validateFormHtmlField(year2Input, "Minden eseményhez kell tartoznia évszámnak!");//Akkor írjon ki egy hibaüzenetet
         }
-        
-        valid = false;
+        valid = false;//A valid értéke át let rakva false-ra
     }
-    
-
-   
-    
-
-    return valid;
-
-    
+    return valid;//Térjen vissza a változóval
 }
 
+
+
+function simpleValidation(rulerInput,eventInput,yearInput,){//Új függvény definiálása melynek bemeneti értékei: rulerInput,eventInput,yearInput, event2Input, year2Input
+    let valid = true;//A valid alapértelmezett értéke true;
+
+    if(!validateFormHtmlField(rulerInput, "Az uralkodó megadása kötelező!")){//Ha a validateFormHtmlField !== true azaz nincs semmi írva az adott cellába akkor kiírja  a hibaüzenetet
+        valid = false;//És a valid értékét átrakja hamisra
+    }
+
+    if(!validateFormHtmlField(eventInput, "Az esemény megadása kötelező!")){//Ha a validateFormHtmlField !== true azaz nincs semmi írva az adott cellába akkor kiírja  a hibaüzenetet
+        valid = false;//És a valid értékét átrakja hamisra
+    }
+
+    if(!validateFormHtmlField(yearInput, "Az évszám megadása kötelező!")){//Ha a validateFormHtmlField !== true azaz nincs semmi írva az adott cellába akkor kiírja  a hibaüzenetet
+        valid = false;//És a valid értékét átrakja hamisra
+    }
+
+   
+    return valid;//Térjen vissza a változóval
+}
 function validateFormHtmlField(inputHtmlElement, errormessage){//Új függvény melynek van két bemeneti értéke
     let valid = true;//Alapértelmezetten a weboldal-ban nincs hiba, azaz az érték true
     if(inputHtmlElement.value.trim()  === ""){//Ha a bemeneti mezőben nincs semmi
