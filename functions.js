@@ -1,13 +1,14 @@
 
 
-/*
-Fejléc generálás
+
+/**
+ * Fejléc generálás
 Készít egy új sort(tr) amiben el lesznek helyezve a cellák(th)
 Utána végigmegy a headObj objektumon 
 A for cikluson belül elkészíti a cellákat
 Melyeknek megadja az értéket: Az Uralkodó, Esemény, Évszám
 És ezt hozzáadja a sorhoz
-*/
+ */
 function headerGenerate(){//Új függvény amely a fejlécet generálja le
     const tr = document.createElement("tr");//Új sor létrehozása a theadben
     thead.appendChild(tr);//A tr hozzácsatolása a thead-hez
@@ -22,14 +23,13 @@ function headerGenerate(){//Új függvény amely a fejlécet generálja le
 
 /**
  * 
- * @param {array} array //A típus megadása
- */
-/*
-A táblázat generálása
+ * A táblázat generálása
 Létrehozunk egy sort(tr) melybe belerakunk három td elemet amelyebe belerakjuk az array-ből kiszedett tulajdonságoknak az értékeit
 Ezután csinálunk egy elágazást amely megnézi, hogy a második esemény és évszám cellában van e valami
 Ha van akkor legenerálja azokat is 
-*/ 
+ * @param {array} array //A típus megadása
+ */
+
 function renderTable(array){//Új függvény definiálása és egy paraméter
     for(const Currentelement of array){//Bejárjuk az array paramétert-t a Currentelement-tel
     
@@ -67,8 +67,9 @@ function renderTable(array){//Új függvény definiálása és egy paraméter
     
     }
     }
-    /*
-  Űrlap generálás függvény
+
+/**
+ *   Űrlap generálás függvény
   deklarálunk egy form-ot amit hozzárakunk a body-hoz és adunk neki egy form id-t
   Ezután hozzárendeljük a formhoz az egyes rublikákat
   És készítünk egy gombot melynek megadjuk a típusát, a szöveget ami rajta lesz a gombon és azt hozzárendeljük a form-hoz
@@ -93,15 +94,7 @@ function createForm(){//Új form generálós függvény
  }
 
  /**
-  * 
-  * @param {HTMLElement} parent //A típus megadása
-  * @param {String} type //A típus megadása
-  * @param {String} text //A típus megadása
-  * @param {String} nameAndId //A típus megadása
-  * @returns 
-  */
- /*
- Rublikák létrehozása
+  *  Rublikák létrehozása
  Minden rublika egy divben lesz benne és lesz egy label-je és egy input mezője, ezen kívül egy külön divben(de még mindig az eredeti div-en belül lesz egy másik div aminek csak egy error class-t megadunk)
  Megcsináljuk a nagy divet és annak adunk egy class-t
  utána a labelt-t aminek megadjuk a for-át és az értékét
@@ -109,7 +102,13 @@ function createForm(){//Új form generálós függvény
  És végül még a divet aminek adunk egy error class-t
  Ezután csak belepakolunk mindent a div-be és néha adunk egy-két sortörést
  És meghívjuk a függvényt
- */ 
+  * @param {HTMLElement} parent //A típus megadása
+  * @param {String} type //A típus megadása
+  * @param {String} text //A típus megadása
+  * @param {String} nameAndId //A típus megadása
+  * @returns 
+  */
+
  function createInputInDiv(parent, type, text, nameAndId){//Függvény deklarálása bemeneti értékekkel
     let div = document.createElement('div');//div elem létrehozása
     div.className = 'field';//Adunk neki egy class-t
@@ -144,17 +143,16 @@ function createForm(){//Új form generálós függvény
 
 /**
  * 
- * @param {HTMLElement} event2Input //A típus megadása
- * @param {HTMLElement} year2Input //A típus megadása
- * @returns 
- */
-/* 
-A második esemény és év validációja
+ * A második esemény és év validációja
 Ha a második eseménybe van valami írva de a második évszámba nincs vagy fordítva
 Akkor hívja meg a validateFormHtmlField függvényt és írja ki a megfelelő helyre a hibaüzenetet
 És legeyne a valid értéke hamis
 És térjen vissza egy bool típusú értékkel
-*/
+ * @param {HTMLElement} event2Input //A típus megadása
+ * @param {HTMLElement} year2Input //A típus megadása
+ * @returns 
+ */
+
 function masodikAdatokValidacio( event2Input, year2Input){//Új függvény amely a  második eseményt és annak évszámát kezeli
     let valid = true;//A valid értéke alapértelmezetten true 
     if ((event2Input.value && !year2Input.value) || (!event2Input.value && year2Input.value)) {//Ha a második eseménybe van valami írva de a második évszámba nincs vagy fordítva
@@ -172,16 +170,15 @@ function masodikAdatokValidacio( event2Input, year2Input){//Új függvény amely
 
 /**
  * 
+ * A táblázat többi részének validálása
+Ha bármelyik rublika üres, akkor dobjon ki a megfelelő helyre egy hibaüzenetet
+És legyen a valid értéke hamis
  * @param {HTMLElement} rulerInput //A típus megadása
  * @param {HTMLElement} eventInput //A típus megadása
  * @param {HTMLElement} yearInput //A típus megadása
  * @returns 
  */
-/*
-A táblázat többi részének validálása
-Ha bármelyik rublika üres, akkor dobjon ki a megfelelő helyre egy hibaüzenetet
-És legyen a valid értéke hamis
-*/
+
 function simpleValidation(rulerInput,eventInput,yearInput,){//Új függvény definiálása melynek bemeneti értékei: rulerInput,eventInput,yearInput, event2Input, year2Input
     let valid = true;//A valid alapértelmezett értéke true;
 
@@ -201,16 +198,14 @@ function simpleValidation(rulerInput,eventInput,yearInput,){//Új függvény def
     return valid;//Térjen vissza a változóval
 }
 /**
- * 
+ * A validateFormHtmlField függvény a html mezők validálására
+Ha a mező üres, akkor kiírja a hibaüzenetet 
+Ha a mező nem üres, akkor térjen vissza true-val
  * @param {HTMLElement} inputHtmlElement //A típus megadása
  * @param {String} errormessage //A típus megadása
  * @returns 
  */
-/*
-A validateFormHtmlField függvény a html mezők validálására
-Ha a mező üres, akkor kiírja a hibaüzenetet 
-Ha a mező nem üres, akkor térjen vissza true-val
- */
+
 function validateFormHtmlField(inputHtmlElement, errormessage){//Új függvény melynek van két bemeneti értéke
     let valid = true;//Alapértelmezetten a weboldal-ban nincs hiba, azaz az érték true
     if(inputHtmlElement.value.trim()  === ""){//Ha a bemeneti mezőben nincs semmi
