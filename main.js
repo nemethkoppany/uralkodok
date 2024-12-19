@@ -57,23 +57,20 @@ colgroup.appendChild(col3); // Hozzáadás a colgroup-hoz
 const thead = document.createElement("thead");//thead elem létrehozása
 table.appendChild(thead); // A táblázat fejlécébe
 
-const thead_tr = document.createElement("tr");//tr elem létrehozása a theaden belül
-thead.appendChild(thead_tr); // A fejlécbe
-
-const th = document.createElement("th");//th elem létrehozása a tr-en belül
-th.innerHTML = headerObj.headerRuler;//a th értéke a headerObj objektum headerRuler tulajdonságának az értéke
-thead_tr.appendChild(th); // A fejlécbe
-
-const th2 = document.createElement("th")//th elem létrehozása a tr-en belül
-th2.innerHTML = headerObj.headerEvent;//a th értéke a headerObj objektum headerEvenet tulajdonságának az értéke
-thead_tr.appendChild(th2); // A fejlécbe
-
-const th3 = document.createElement("th");//th elem létrehozása a tr-en belül
-th3.innerHTML = headerObj.headerYear;//a th értéke a headerObj objektum headerYear tulajdonságának az értéke
-thead_tr.appendChild(th3); // A fejlécbe
-
 const tbody = document.createElement("tbody");//tbody elem létrehozása
 table.appendChild(tbody); // A táblázat testébe
+
+function headerGenerate(){//Új függvény amely a fejlécet generálja le
+    const tr = document.createElement("tr");//Új sor létrehozása a theadben
+    thead.appendChild(tr);//A tr hozzácsatolása a thead-hez
+
+    for(const head of Object.values(headerObj)){//Végigmegyünk a head-el a headObj nevű Objektumon 
+        const th = document.createElement("th");//th elem létrehozása
+        th.innerHTML = head;//A th elem belsejében lesz a head (Ami itt az Uralkodó, Esemény és Évszám)
+        tr.appendChild(th);//A tr-hez hozzácsatoljuk a th-t
+    }
+   
+}
 
 function renderTable(){//Új függvény definiálása
 for(const Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Currentelement-tel
@@ -113,6 +110,7 @@ for(const Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Cu
 }
 }
 renderTable();//A függvény meghívása
+headerGenerate();//A függvény meghívása
 
 const form = document.getElementById("form");//bekérjük a form elementet a html-ből a getElementById-val és eltároljuk azt egy form nevű változóban
 
