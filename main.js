@@ -72,8 +72,8 @@ function headerGenerate(){//Új függvény amely a fejlécet generálja le
    
 }
 
-function renderTable(){//Új függvény definiálása
-for(const Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Currentelement-tel
+function renderTable(array){//Új függvény definiálása és egy paraméter
+for(const Currentelement of array){//Bejárjuk az array paramétert-t a Currentelement-tel
 
     const tbody_tr = document.createElement("tr");//tr elem létrehozása a tbody-n belül
     tbody.appendChild(tbody_tr);//Belerakjuk a tbody-ba
@@ -109,7 +109,7 @@ for(const Currentelement of uralkodokArray){//Bejárjuk az uralkodokArray-t a Cu
 
 }
 }
-renderTable();//A függvény meghívása
+renderTable(uralkodokArray);//A függvény meghívása és az array megadása amivel dolgoznia kell a függvénynek
 headerGenerate();//A függvény meghívása
 
 const form = document.getElementById("form");//bekérjük a form elementet a html-ből a getElementById-val és eltároljuk azt egy form nevű változóban
@@ -145,7 +145,7 @@ form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb l
 
     uralkodokArray.push(newElement);//Az objektumot hozzáadjuk az uralkodokArray-hoz
     tbody.innerHTML ="";//Töröljük a tábla elemeit, hogy ne generálódjon le többször
-    renderTable();//A függvény meghívása
+    renderTable(uralkodokArray);//A függvény meghívása és az array megadása amivel dolgoznia kell a függvénynek
     thisForm.reset();//Ha megnyomjuk a gombot automatikusan törli az űrlapot 
     }
 })
