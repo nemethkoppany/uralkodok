@@ -112,6 +112,53 @@ for(const Currentelement of array){//Bejárjuk az array paramétert-t a Currente
 renderTable(uralkodokArray);//A függvény meghívása és az array megadása amivel dolgoznia kell a függvénynek
 headerGenerate();//A függvény meghívása
 
+function createForm(){
+    let form = document.createElement('form');
+    document.body.appendChild(form);
+    form.id = 'form';
+ 
+    form.appendChild(
+        createInputInDiv(form, 'text', 'Második esemény évszáma:', 'evszam2'),
+        createInputInDiv(form, 'text', 'Uralkodó neve:', 'uralkodo_nev'),
+        createInputInDiv(form, 'text', 'Első esemény:', 'esemeny1'),
+        createInputInDiv(form, 'text', 'Első esemény évszáma:', 'evszam1'),
+        createInputInDiv(form, 'text', 'Második esemény:', 'esemeny2'), 
+    )
+ 
+    let button = document.createElement('button');
+    button.type = 'submit';
+    button.innerText = 'Hozzáadás';
+    form.appendChild(button);
+ }
+ 
+ function createInputInDiv(parent, type, text, nameAndId){
+    let div = document.createElement('div');
+    div.className = 'field';
+ 
+    let label = document.createElement('label');
+    label.htmlFor = nameAndId;
+    label.innerText = text;
+ 
+    let input = document.createElement('input');
+    input.type = type;
+    input.name = nameAndId;
+    input.id = nameAndId;
+ 
+    let err = document.createElement('div');
+    err.classList.add('error');
+ 
+    parent.appendChild(div);
+    div.appendChild(label);
+    div.appendChild(document.createElement('br'));
+    div.appendChild(input);
+    div.appendChild(document.createElement('br'));
+    div.appendChild(document.createElement('br'));
+    div.appendChild(err);
+ 
+    return div;
+ }
+ createForm();
+
 const form = document.getElementById("form");//bekérjük a form elementet a html-ből a getElementById-val és eltároljuk azt egy form nevű változóban
 
 form.addEventListener("submit", function(e){//a form eseménykezelője, a gomb lenyomásakor aktiválódik
@@ -197,3 +244,4 @@ function validateFormHtmlField(inputHtmlElement, errormessage){//Új függvény 
     }
     return valid;//Visszatérünk a validdal, true ha átment a validáción, false ha nem
 }
+
