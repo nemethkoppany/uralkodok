@@ -79,11 +79,11 @@ function createForm(){//Új form generálós függvény
     form.id = 'form';//Adunk neki id-t
  
     form.appendChild(//A form-hoz hozzárakjuk:
-        createInputInDiv(form, 'text', 'Második esemény évszáma:', 'evszam2'),//rublikageneráló függvény meghívása
-        createInputInDiv(form, 'text', 'Uralkodó neve:', 'uralkodo_nev'),//rublikageneráló függvény meghívása
-        createInputInDiv(form, 'text', 'Első esemény:', 'esemeny1'),//rublikageneráló függvény meghívása
-        createInputInDiv(form, 'text', 'Első esemény évszáma:', 'evszam1'),//rublikageneráló függvény meghívása
-        createInputInDiv(form, 'text', 'Második esemény:', 'esemeny2'), //rublikageneráló függvény meghívása
+        createInputInDiv(form, 'text', 'Második esemény évszáma:', 'evszam2'),//rublikageneráló függvény meghívása  és paramétereinek megadása
+        createInputInDiv(form, 'text', 'Uralkodó neve:', 'uralkodo_nev'),//rublikageneráló függvény meghívása és paramétereinek megadása
+        createInputInDiv(form, 'text', 'Első esemény:', 'esemeny1'),//rublikageneráló függvény meghívása és paramétereinek megadása
+        createInputInDiv(form, 'text', 'Első esemény évszáma:', 'evszam1'),//rublikageneráló függvény meghívása és paramétereinek megadása
+        createInputInDiv(form, 'text', 'Második esemény:', 'esemeny2'), //rublikageneráló függvény meghívása és paramétereinek megadása
     )
  
     let button = document.createElement('button');//Gomb létrehozádsa
